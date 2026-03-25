@@ -5,7 +5,7 @@ from pytest_metadata.plugin import metadata_key
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--browser",
+        "--mybrowser",
         action="store",
         default="chrome",
         help="Specify the browser: chrome or firefox or edge"
@@ -14,7 +14,7 @@ def pytest_addoption(parser):
 
 @pytest.fixture()
 def browser(request):
-    return request.config.getoption("--browser")
+    return request.config.getoption("--mybrowser")
 
 
 @pytest.fixture()
@@ -44,8 +44,6 @@ def pytest_configure(config):
     config.stash[metadata_key]['Test Module Name'] = 'Admin Login Tests'
     config.stash[metadata_key]['Tester Name'] = 'Avinash'
 
-
-# Hook for delete/modify environment info in html report
 
 @pytest.hookimpl(optionalhook=True)
 def pytest_metadata(metadata):
